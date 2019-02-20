@@ -5,34 +5,59 @@ const yosay = require('yosay');
 
 module.exports = class extends Generator {
   prompting() {
-    // Have Yeoman greet the user.
     this.log(
-      yosay(`Welcome to the grand ${chalk.red('generator-ew-express')} generator!`)
+      yosay(`This generator will install ${chalk.red('Eisenwerk Express application')}.`)
     );
 
-    const prompts = [
+    return this.prompt([
       {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
-      }
-    ];
+        type: 'input',
+        name: 'applicationName',
+        message: 'Application name',
+      },
+      {
+        type: 'input',
+        name: 'applicationCode',
+        message: 'Application code',
+        validate: async (value) => {
+          if (typeof value !== "string") {
+            return 'Must be a string';
+          }
 
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
+          if (!value.match(/^[a-zA-Z0-9-_]+$/)) {
+            return 'Should contain only letters, digits, _ and - signs';
+          }
+
+          // todo: check if the folder exists
+
+          return true;
+        }
+      },
+      {
+        type: 'input',
+        name: 'vendorName',
+        message: 'Vendor name (to publish at the DockerHub, etc.)',
+      },
+      {
+        type: 'input',
+        name: 'authorName',
+        message: 'Author name (to appear in LICENSE, README.md, etc.)',
+      }
+    ]).then(props => {
+      this.answers = props;
     });
   }
 
-  writing() {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+  copyFiles() {
+    this.fs.copyTpl(
+      this.templatePath(''),
+      this.destinationPath(this.answers.applicationCode),
+      this.answers
     );
   }
 
   install() {
-    this.installDependencies();
+    // todo: install node modules
+    // this.installDependencies();
   }
 };
