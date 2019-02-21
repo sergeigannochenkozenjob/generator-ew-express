@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 const path = require('path');
 const pathExists = require('path-exists');
+const ejs = require('ejs');
 
 module.exports = class extends Generator {
   prompting() {
@@ -12,6 +13,12 @@ module.exports = class extends Generator {
     );
 
     return this.prompt([
+      {
+        type: 'confirm',
+        name: 'isMonorepo',
+        message: 'Are we inside a monorepo?',
+        default: false,
+      },
       {
         type: 'input',
         name: 'applicationName',
@@ -47,21 +54,45 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'authorName',
         message: 'Author name (to appear in LICENSE, README.md, etc.)',
-      }
+      },
     ]).then(props => {
       this.answers = props;
     });
   }
 
   copyFiles() {
+    return;
+
     this.fs.copyTpl(
-      this.templatePath(''),
+      this.templatePath('codebase'),
       this.destinationPath(this.answers.applicationCode),
       this.answers
     );
   }
 
+  async addToComposition() {
+    console.dir(this.answers);
+    if (this.answers.isMonorepo) {
+
+      const devPart = path.join(this.templatePath('codebase'), 'composition-parts', 'service.development.yml');
+      console.dir(await pathExists(devPart));
+      // if (!()) {
+      //   return;
+      // }
+
+      console.dir(devPart);
+
+      // const part = await new Promise((resolve, reject) => {
+      //   ejs.renderFile(filename, data, options, function(err, str){
+      //     // str => Rendered HTML string
+      //   });
+      // });
+    }
+  }
+
   install() {
+    return;
+
     const deps = [
       '@babel/polyfill',
       'body-parser',

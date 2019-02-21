@@ -1,0 +1,14 @@
+<%- applicationCode %>:
+  image: <%- applicationCode %>:dev
+  build:
+    context: ../<%- applicationCode %>/
+    dockerfile: docker/development.dockerfile
+  expose:
+    - <%- port %>
+  ports:
+    - <%- port %>:<%- port %>
+  depends_on:
+  volumes:
+    - ../<%- applicationCode %>/:/app/
+  environment:
+    - NODE_ENV=development
