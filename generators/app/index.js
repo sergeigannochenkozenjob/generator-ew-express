@@ -29,8 +29,8 @@ module.exports = class extends Generator {
             return 'Must be a string';
           }
 
-          if (!value.match(/^[a-zA-Z0-9-_]+$/)) {
-            return 'Must contain only letters, digits, _ and - signs';
+          if (!value.match(/^[a-zA-Z0-9-_\.]+$/)) {
+            return 'Must contain only letters, digits, _, - and . signs';
           }
 
           const dst = path.join(process.cwd(), value);
