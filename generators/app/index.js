@@ -92,6 +92,13 @@ module.exports = class extends Generator {
     );
   }
 
+  async makeScriptsExecutable() {
+    const scriptsPath = path.join(process.cwd(), 'script');
+    if (await pathExists(scriptsPath)) {
+      this.spawnCommand("chmod", ["+x", path.join(scriptsPath, '*')]);
+    }
+  }
+
   async addToComposition() {
     if (this.answers.isMonorepo) {
       const cDevPath = path.join(process.cwd(), 'compose', 'development.yml');
