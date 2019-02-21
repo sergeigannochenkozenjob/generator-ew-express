@@ -1,14 +1,14 @@
-<%- applicationCode %>:
-  image: <%- applicationCode %>:dev
-  build:
-    context: ../<%- applicationCode %>/
-    dockerfile: docker/development.dockerfile
-  expose:
-    - <%- port %>
-  ports:
-    - <%- port %>:<%- port %>
-  depends_on:
-  volumes:
-    - ../<%- applicationCode %>/:/app/
-  environment:
-    - NODE_ENV=development
+image: <%- applicationCode %>:dev
+build:
+  context: ../<%- applicationFolder %>/
+  dockerfile: docker/development.dockerfile
+expose:
+  - '<%- port %>'
+ports:
+  - '<%- port %>:<%- port %>'
+depends_on:
+volumes:
+  - ../<%- applicationFolder %>/:/app/
+environment:
+  - NODE_ENV=development
+  - PORT=<%- port %>

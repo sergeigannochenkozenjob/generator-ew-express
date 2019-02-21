@@ -14,7 +14,7 @@ export default class Application {
     instance.attachErrorHandler(app);
 
     const hostname = process.env.HOST || 'localhost';
-    const port = process.env.PORT || 8500;
+    const port = process.env.PORT || 3000;
 
     app.set('host', hostname);
     app.set('port', port);

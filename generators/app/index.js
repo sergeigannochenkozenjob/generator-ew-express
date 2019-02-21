@@ -5,6 +5,8 @@ const yosay = require('yosay');
 const path = require('path');
 const pathExists = require('path-exists');
 const ejs = require('ejs');
+const yaml = require('js-yaml');
+const fs = require('fs');
 
 module.exports = class extends Generator {
   prompting() {
@@ -13,12 +15,6 @@ module.exports = class extends Generator {
     );
 
     return this.prompt([
-      {
-        type: 'confirm',
-        name: 'isMonorepo',
-        message: 'Are we inside a monorepo?',
-        default: false,
-      },
       {
         type: 'input',
         name: 'applicationName',
@@ -34,7 +30,7 @@ module.exports = class extends Generator {
           }
 
           if (!value.match(/^[a-zA-Z0-9-_]+$/)) {
-            return 'Should contain only letters, digits, _ and - signs';
+            return 'Must contain only letters, digits, _ and - signs';
           }
 
           const dst = path.join(process.cwd(), value);
@@ -55,44 +51,83 @@ module.exports = class extends Generator {
         name: 'authorName',
         message: 'Author name (to appear in LICENSE, README.md, etc.)',
       },
+      {
+        type: 'confirm',
+        name: 'isMonorepo',
+        message: 'Are we inside a monorepo?',
+        default: false,
+      },
+      {
+        type: 'input',
+        name: 'port',
+        message: 'Port number',
+        default: 3000,
+        when: answers => {
+          return answers.isMonorepo;
+        },
+        validate: async (value) => {
+          if (typeof value !== "string") {
+            return true; // the default value will be used
+          }
+
+          value = parseInt(value, 10);
+          if (isNaN(value) || value < 0 || value > 65535) {
+            return `Must be a number between 0 and 65535`;
+          }
+
+          return true;
+        }
+      },
     ]).then(props => {
+      props.applicationFolder = props.isMonorepo ? `app.${props.applicationCode}` : props.applicationCode;
       this.answers = props;
     });
   }
 
   copyFiles() {
-    return;
-
     this.fs.copyTpl(
       this.templatePath('codebase'),
-      this.destinationPath(this.answers.applicationCode),
+      this.destinationPath(this.answers.applicationFolder),
       this.answers
     );
   }
 
   async addToComposition() {
-    console.dir(this.answers);
     if (this.answers.isMonorepo) {
+      const cDevPath = path.join(process.cwd(), 'compose', 'development.yml');
+      if (! await pathExists(cDevPath)) {
+        return;
+      }
 
-      const devPart = path.join(this.templatePath('codebase'), 'composition-parts', 'service.development.yml');
-      console.dir(await pathExists(devPart));
-      // if (!()) {
-      //   return;
-      // }
+      const devPart = path.join(this.templatePath('composition-parts'), 'service.development.yml');
+      if (! await pathExists(devPart)) {
+        return;
+      }
 
-      console.dir(devPart);
+      const part = await new Promise((resolve, reject) => {
+        ejs.renderFile(devPart, this.answers, {}, (err, str) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(str);
+          }
+        });
+      });
 
-      // const part = await new Promise((resolve, reject) => {
-      //   ejs.renderFile(filename, data, options, function(err, str){
-      //     // str => Rendered HTML string
-      //   });
-      // });
+      let ymlPart = yaml.safeLoad(part);
+
+      // some hard-coded crap
+      ymlPart.depends_on = ymlPart.depends_on || [];
+
+      const ymlWhole = yaml.safeLoad(fs.readFileSync(cDevPath, 'utf8'));
+      ymlWhole.services = ymlWhole.services || {};
+      ymlWhole.services[this.answers.applicationCode] = ymlPart;
+
+      fs.writeFileSync(cDevPath, yaml.safeDump(ymlWhole));
     }
   }
 
   install() {
-    return;
-
     const deps = [
       '@babel/polyfill',
       'body-parser',
@@ -142,10 +177,10 @@ module.exports = class extends Generator {
     ];
 
     if (deps.length) {
-      this.spawnCommand("npm", ["install", ...deps], {cwd: this.answers.applicationCode});
+      this.spawnCommand("npm", ["install", ...deps], {cwd: this.answers.applicationFolder});
     }
     if (depsDev.length) {
-      this.spawnCommand("npm", ["install", ...depsDev, "--save-dev"], {cwd: this.answers.applicationCode});
+      this.spawnCommand("npm", ["install", ...depsDev, "--save-dev"], {cwd: this.answers.applicationFolder});
     }
   }
 };
