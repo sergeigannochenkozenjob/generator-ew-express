@@ -2,6 +2,8 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const path = require('path');
+const pathExists = require('path-exists');
 
 module.exports = class extends Generator {
   prompting() {
@@ -28,7 +30,10 @@ module.exports = class extends Generator {
             return 'Should contain only letters, digits, _ and - signs';
           }
 
-          // todo: check if the folder exists
+          const dst = path.join(process.cwd(), value);
+          if (await pathExists(dst)) {
+            return `Folder exists: ${dst}`;
+          }
 
           return true;
         }
