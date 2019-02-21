@@ -1,36 +1,11 @@
-# generator-ew-express [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> Backend application made with express
-
-## Installation
-
-First, install [Yeoman](http://yeoman.io) and generator-ew-express using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+# Eisenwerk express generator
 
 ```bash
-npm install -g yo
-npm install -g generator-ew-express
+npm install -g yo;
+git clone https://github.com/awesome1888/generator-ew-express.git;
+cd generator-ew-express;
+npm install;
+npm link;
+cd <projects-folder>;
+yo ew-express;
 ```
-
-Then generate your new project:
-
-```bash
-yo ew-express
-```
-
-## Getting To Know Yeoman
-
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
-
-## License
-
-MIT © [gannochenkoff](gannochenkoff.com)
-
-
-[npm-image]: https://badge.fury.io/js/generator-ew-express.svg
-[npm-url]: https://npmjs.org/package/generator-ew-express
-[travis-image]: https://travis-ci.org//generator-ew-express.svg?branch=master
-[travis-url]: https://travis-ci.org//generator-ew-express
-[daviddm-image]: https://david-dm.org//generator-ew-express.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org//generator-ew-express
