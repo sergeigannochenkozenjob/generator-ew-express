@@ -80,6 +80,10 @@ module.exports = class extends Generator {
       },
     ]).then(props => {
       props.applicationFolder = props.isMonorepo ? `app.${props.applicationCode}` : props.applicationCode;
+      props.applicationCodeGlobal = props.applicationCode;
+      if (props.isMonorepo) {
+        props.applicationCodeGlobal = `${path.basename(process.cwd())}_${props.applicationCode}`;
+      }
       this.answers = props;
     });
   }

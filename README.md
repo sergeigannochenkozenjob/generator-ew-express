@@ -12,7 +12,7 @@ yo ew-express;
 
 ## To-do's & bugs:
 
-* When putting the app to the monorepo, inside script/push.sh the image name should be `monrepo-name_app-name`, not just `app-name`
+* [DONE] When putting the app to the monorepo, inside script/push.sh the image name should be `monrepo-name_app-name`, not just `app-name`
 * Add GraphQL support (optional)
-* Add error handler
+* Add a nice error handler
 * See Eisenwerk project for more notes

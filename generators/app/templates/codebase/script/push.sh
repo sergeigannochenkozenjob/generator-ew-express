@@ -3,6 +3,6 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 VERSION="${1:-latest}"
 
-docker build -t <%- vendorName %>/<%- applicationCode %>:$VERSION -f docker/production.dockerfile .;
-docker push <%- vendorName %>/<%- applicationCode %>:$VERSION
-docker rmi <%- vendorName %>/<%- applicationCode %>:$VERSION
+docker build -t <%- vendorName %>/<%- applicationCodeGlobal %>:$VERSION -f docker/production.dockerfile .;
+docker push <%- vendorName %>/<%- applicationCodeGlobal %>:$VERSION
+docker rmi <%- vendorName %>/<%- applicationCodeGlobal %>:$VERSION
