@@ -1,7 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const webpack = require('webpack');
-const NodemonPlugin = require('nodemon-webpack-plugin');
+const nodemonPlugin = require('nodemon-webpack-plugin');
 
 module.exports = (env, argv) => {
     env = env || {};
@@ -23,7 +23,7 @@ module.exports = (env, argv) => {
             filename: '[name].js',
         },
         resolve: {
-            extensions: ['.ts', '.tsx', '.js', '.jsx'],
+            extensions: ['.ts', '.js'],
         },
         module: {
             rules: [
@@ -67,7 +67,7 @@ module.exports = (env, argv) => {
                 __DEV__: development,
                 __TEST__: false,
             }),
-            new NodemonPlugin(),
+            new nodemonPlugin(),
         ],
     };
 };
