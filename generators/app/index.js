@@ -79,6 +79,7 @@ module.exports = class extends Generator {
         }
       },
     ]).then(props => {
+      props.port = props.port || 3000;
       props.applicationFolder = props.isMonorepo ? `app.${props.applicationCode}` : props.applicationCode;
       props.applicationCodeGlobal = props.applicationCode;
       if (props.isMonorepo) {
