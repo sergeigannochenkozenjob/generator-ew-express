@@ -1,7 +1,8 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const webpack = require('webpack');
-const nodemonPlugin = require('nodemon-webpack-plugin');
+const nodemonPlugin = require('nodemon-webpack-plugin');<% if (supportTS) { %>
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');<% } %>
 
 module.exports = (env, argv) => {
     env = env || {};
@@ -51,11 +52,21 @@ module.exports = (env, argv) => {
                         },
                     ],
                 },
+                <% if (supportTS) { %>
                 {
                     test: /\.tsx?$/,
-                    use: 'ts-loader',
+                    loaders: [
+                        {
+                            loader: 'ts-loader',
+                            options: {
+                                transpileOnly: true,
+                            },
+                        },
+                    ],
+
                     exclude: /node_modules/,
                 },
+                <% } %>
             ],
         },
         plugins: [
@@ -67,7 +78,8 @@ module.exports = (env, argv) => {
                 __DEV__: development,
                 __TEST__: false,
             }),
-            new nodemonPlugin(),
+            new nodemonPlugin(),<% if (supportTS) { %>
+            new ForkTsCheckerWebpackPlugin(),<% } %>
         ],
     };
 };

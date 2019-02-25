@@ -78,6 +78,12 @@ module.exports = class extends Generator {
           return true;
         }
       },
+      {
+        type: 'confirm',
+        name: 'supportTS',
+        message: 'Do we support TypeScript?',
+        default: false,
+      },
     ]).then(props => {
       props.port = props.port || 3000;
       props.applicationFolder = props.isMonorepo ? `app.${props.applicationCode}` : props.applicationCode;
@@ -90,11 +96,16 @@ module.exports = class extends Generator {
   }
 
   copyFiles() {
-    this.fs.copyTpl(
-      this.templatePath('codebase'),
-      this.destinationPath(this.answers.applicationFolder),
-      this.answers
-    );
+    ['**/.*', ''].forEach((pattern) => {
+      this.fs.copyTpl(
+        this.templatePath(`codebase/${pattern}`),
+        this.destinationPath(this.answers.applicationFolder),
+        this.answers,
+        {
+          dot: true,
+        }
+      );
+    });
   }
 
   async makeScriptsExecutable() {
