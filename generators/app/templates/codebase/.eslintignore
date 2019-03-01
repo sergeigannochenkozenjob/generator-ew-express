@@ -1,5 +1,2 @@
-internals/**
-app/app.js
 build/
-server/
 coverage/
