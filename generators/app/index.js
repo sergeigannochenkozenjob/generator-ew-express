@@ -199,6 +199,10 @@ module.exports = class extends Generator {
       'webpack-merge',
     ];
 
+    if (this.answers.supportTS) {
+      devDeps.push('fork-ts-checker-webpack-plugin');
+    }
+
     if (deps.length) {
       this.spawnCommand("yarn", ["add", ...deps], {cwd: this.answers.applicationFolder});
     }
