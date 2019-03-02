@@ -200,7 +200,7 @@ module.exports = class extends Generator {
     ];
 
     if (this.answers.supportTS) {
-      devDeps.push('fork-ts-checker-webpack-plugin');
+      depsDev.push('fork-ts-checker-webpack-plugin');
     }
 
     if (deps.length) {
