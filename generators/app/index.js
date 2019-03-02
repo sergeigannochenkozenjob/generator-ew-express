@@ -200,10 +200,10 @@ module.exports = class extends Generator {
     ];
 
     if (deps.length) {
-      this.spawnCommand("npm", ["install", ...deps], {cwd: this.answers.applicationFolder});
+      this.spawnCommand("yarn", ["add", ...deps], {cwd: this.answers.applicationFolder});
     }
     if (depsDev.length) {
-      this.spawnCommand("npm", ["install", ...depsDev, "--save-dev"], {cwd: this.answers.applicationFolder});
+      this.spawnCommand("yarn", ["add", ...depsDev, "--dev"], {cwd: this.answers.applicationFolder});
     }
   }
 };
