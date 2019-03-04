@@ -193,6 +193,7 @@ module.exports = class extends Generator {
       'supertest',
       'ts-loader',
       'typescript',
+      'raw-loader',
       'webpack',
       'webpack-cli',
       'webpack-node-externals',

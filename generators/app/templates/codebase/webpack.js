@@ -52,6 +52,10 @@ module.exports = (env, argv) => {
                         },
                     ],
                 },
+                {
+                    test: /\.(txt|html)$/,
+                    use: 'raw-loader',
+                },
                 <% if (supportTS) { %>
                 {
                     test: /\.tsx?$/,
