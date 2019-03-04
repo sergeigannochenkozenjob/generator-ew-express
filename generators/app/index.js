@@ -191,8 +191,6 @@ module.exports = class extends Generator {
       'prettier',
       'pretty-quick',
       'supertest',
-      'ts-loader',
-      'typescript',
       'raw-loader',
       'webpack',
       'webpack-cli',
@@ -202,6 +200,8 @@ module.exports = class extends Generator {
 
     if (this.answers.supportTS) {
       depsDev.push('fork-ts-checker-webpack-plugin');
+      depsDev.push('ts-loader');
+      depsDev.push('typescript');
     }
 
     if (deps.length) {
