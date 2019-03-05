@@ -5,4 +5,4 @@ VERSION="${1:-latest}"
 
 docker build -t <%- vendorName %>/<%- applicationCodeGlobal %>:$VERSION -f docker/production.dockerfile .;
 docker push <%- vendorName %>/<%- applicationCodeGlobal %>:$VERSION
-docker rmi <%- vendorName %>/<%- applicationCodeGlobal %>:$VERSION
+# docker rmi <%- vendorName %>/<%- applicationCodeGlobal %>:$VERSION
