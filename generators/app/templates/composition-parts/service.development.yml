@@ -11,4 +11,4 @@ volumes:
   - ../<%- applicationFolder %>/:/app/
 environment:
   - NODE_ENV=development
-  - PORT=<%- port %>
+  - network.port=<%- port %>
