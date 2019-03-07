@@ -11,4 +11,7 @@ volumes:
   - ../<%- applicationFolder %>/:/app/
 environment:
   - NODE_ENV=development
+  - DEBUG=gql.*
+  - DEBUG_COLORS=1
+  - DEBUG_HIDE_DATE=1
   - network.port=<%- port %>

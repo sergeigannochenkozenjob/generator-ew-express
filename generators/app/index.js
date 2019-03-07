@@ -165,6 +165,7 @@ module.exports = class extends Generator {
       'lodash.isobject',
       'lodash.isstring',
       'lodash.random',
+      'debug',
     ];
 
     const depsDev = [
