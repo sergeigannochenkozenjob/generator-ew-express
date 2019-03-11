@@ -1,20 +1,20 @@
 const isArrayLike = require('lodash.isarraylike');
 const isString = require('lodash.isstring');
 const isObject = require('lodash.isobject');
-const random = require('lodash.random');
+// const random = require('lodash.random');
 // const isNumber = require('lodash.isnumber');
 // const isFunction = require('lodash.isfunction');
 // const union = require('lodash.union');
 // const intersection = require('lodash.intersection');
-const get = require('lodash.get');
-const cloneDeep = require('lodash.clonedeep');
+// const get = require('lodash.get');
+// const cloneDeep = require('lodash.clonedeep');
 // const deepFreeze = require('deep-freeze-node');
 // const isEqual = require('lodash.isequal');
 
 module.exports = {
     isArray: isArrayLike,
     isObject,
-    random,
+    // random,
     // contains: (where, what) => {
     //   if (!isArrayLike(where)) {
     //     return false;
@@ -30,8 +30,8 @@ module.exports = {
     // isEqual,
     // isNumber,
     // isFunction,
-    cloneDeep,
-    get,
+    // cloneDeep,
+    // get,
     // deepFreeze,
     // union,
     // intersection,

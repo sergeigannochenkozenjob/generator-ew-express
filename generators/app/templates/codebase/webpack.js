@@ -77,7 +77,7 @@ module.exports = (env, argv) => {
         plugins: [
             new webpack.ProvidePlugin({
                 _: path.join(__dirname, `src/lib/lodash.js`),
-                logger: path.join(__dirname, `src/lib/logger.js`),
+              logger: ['ew-internals', 'logger'],
             }),
             new webpack.DefinePlugin({
                 __DEV__: development,

@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
-import Settings from './settings/server';
+import { Settings } from 'ew-internals';
 
 import attachHomeAPI from '../api/home';
 

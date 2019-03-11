@@ -1,4 +1,4 @@
-import { wrapError } from '../lib/util';
+import { wrapError } from 'ew-internals';
 
 export default app => {
   app.get(

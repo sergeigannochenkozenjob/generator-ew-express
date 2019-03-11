@@ -166,6 +166,7 @@ module.exports = class extends Generator {
       'lodash.isstring',
       'lodash.random',
       'debug',
+      'ew-internals',
     ];
 
     const depsDev = [
