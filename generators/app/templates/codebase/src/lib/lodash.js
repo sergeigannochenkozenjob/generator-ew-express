@@ -36,7 +36,7 @@ module.exports = {
   // deepFreeze,
   // union,
   // intersection,
-  // difference
+  // difference,
   iane: arg => {
     return isArrayLike(arg) && arg.length > 0;
   },
