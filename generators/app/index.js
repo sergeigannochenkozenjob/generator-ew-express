@@ -161,6 +161,7 @@ module.exports = class extends Generator {
       'lodash.clonedeep',
       'lodash.get',
       'lodash.intersection',
+      'lodash.difference',
       'lodash.isarraylike',
       'lodash.isobject',
       'lodash.isstring',
