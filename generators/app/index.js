@@ -152,22 +152,34 @@ module.exports = class extends Generator {
 
   install() {
     const deps = [
+      // babel
       '@babel/polyfill',
-      'body-parser',
+
+      // express
       'express',
+      'body-parser',
       'cors',
-      'crypto-random-string',
       'helmet',
-      'lodash.clonedeep',
-      'lodash.get',
+
+      // lodash
+      'lodash.isarraylike',
+      'lodash.isstring',
+      'lodash.isobject',
+      'lodash.random',
+      'lodash.isnumber',
+      'lodash.isfunction',
+      'lodash.union',
       'lodash.intersection',
       'lodash.difference',
-      'lodash.isarraylike',
-      'lodash.isobject',
-      'lodash.isstring',
-      'lodash.random',
+      'lodash.get',
+      'lodash.clonedeep',
+      'lodash.isequal',
+
+      // aux
+      'uuid',
       'debug',
       'ew-internals',
+      'deep-freeze-node',
     ];
 
     const depsDev = [
