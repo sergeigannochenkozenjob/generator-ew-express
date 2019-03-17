@@ -1,4 +1,3 @@
-const isArrayLike = require('lodash.isarraylike');
 const isString = require('lodash.isstring');
 const isObject = require('lodash.isobject');
 // const random = require('lodash.random');
@@ -13,7 +12,7 @@ const isObject = require('lodash.isobject');
 // const isEqual = require('lodash.isequal');
 
 module.exports = {
-  isArray: isArrayLike,
+  isArray: Array.isArray,
   isObject,
   // random,
   // contains: (where, what) => {
@@ -38,7 +37,7 @@ module.exports = {
   // intersection,
   // difference,
   iane: arg => {
-    return isArrayLike(arg) && arg.length > 0;
+    return Array.isArray(arg) && arg.length > 0;
   },
   ione: arg => {
     return isObject(arg) && Object.keys(arg).length > 0;

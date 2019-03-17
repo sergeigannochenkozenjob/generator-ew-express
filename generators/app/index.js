@@ -162,7 +162,6 @@ module.exports = class extends Generator {
       'helmet',
 
       // lodash
-      'lodash.isarraylike',
       'lodash.isstring',
       'lodash.isobject',
       'lodash.random',
