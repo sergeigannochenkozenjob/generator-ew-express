@@ -15,3 +15,5 @@ environment:
   - DEBUG_COLORS=1
   - DEBUG_HIDE_DATE=1
   - network.port=<%- port %>
+labels:
+  com.list.name: <%- applicationName %>
