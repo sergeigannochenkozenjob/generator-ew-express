@@ -62,9 +62,6 @@ module.exports = class extends Generator {
         name: 'port',
         message: 'Port number',
         default: 3000,
-        when: answers => {
-          return answers.isMonorepo;
-        },
         validate: async (value) => {
           if (typeof value !== "string") {
             return true; // the default value will be used
