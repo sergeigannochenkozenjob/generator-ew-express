@@ -15,6 +15,7 @@ environment:
   - DEBUG_COLORS=1
   - DEBUG_HIDE_DATE=1
   - network.port=<%- port %>
+  - network.cors=
 labels:
   com.list.name: <%- applicationName %>
   com.list.link.endpoint: 'GraphQL endpoint___/graphql'
