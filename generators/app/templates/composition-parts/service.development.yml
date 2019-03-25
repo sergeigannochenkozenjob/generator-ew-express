@@ -17,3 +17,4 @@ environment:
   - network.port=<%- port %>
 labels:
   com.list.name: <%- applicationName %>
+  com.list.link.endpoint: 'GraphQL endpoint___/graphql'
