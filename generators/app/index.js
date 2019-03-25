@@ -106,7 +106,7 @@ module.exports = class extends Generator {
   }
 
   async makeScriptsExecutable() {
-    const scriptsPath = path.join(process.cwd(), 'script');
+    const scriptsPath = path.join(process.cwd(), this.answers.applicationFolder, 'script');
     if (await pathExists(scriptsPath)) {
       this.spawnCommand("chmod", ["+x", path.join(scriptsPath, '*')]);
     }
