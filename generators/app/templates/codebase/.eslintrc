@@ -7,30 +7,16 @@
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
-  "plugins": [
-    "prettier",
-    "import"
-  ],
+  "plugins": ["prettier", "import"],
   "rules": {
     "prettier/prettier": "error",
-    "import/no-unresolved": "off",
-    "class-methods-use-this": "off",
-    "no-underscore-dangle": "off"
-  },
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module"
+    "import/prefer-default-export": "off",
+    "no-use-before-define": ["error", { "functions": false }]
   },
   "globals": {
     "__DEV__": true,
     "__TEST__": true,
     "logger": true,
     "_": true
-  },
-  "env": {
-    "es6": true,
-    "browser": true,
-    "node": true,
-    "jest": true
   }
 }

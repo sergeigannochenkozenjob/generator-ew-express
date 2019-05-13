@@ -207,6 +207,7 @@ module.exports = class extends Generator {
       'webpack-cli',
       'webpack-node-externals',
       'webpack-merge',
+      'leasot',
     ];
 
     if (this.answers.supportTS) {

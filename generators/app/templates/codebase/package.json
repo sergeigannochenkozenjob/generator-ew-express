@@ -9,7 +9,10 @@
     "test.u": "jest -c ./jest/config.unit.js --forceExit",
     "test.i": "jest -c ./jest/config.integration.js --runInBand --forceExit",
     "build": "webpack --config webpack.js --mode production",
-    "start": "node ./build/index.js"
+    "start": "node ./build/index.js",
+    "lint": "eslint ./src/",
+    "lint:fix": "eslint ./src/ --fix",
+    "techdebt": "leasot --exit-nicely --reporter table --skip-unsupported --ignore node_modules,build,migrations ./"
   },
   "keywords": [
     "this",
