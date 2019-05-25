@@ -70,7 +70,7 @@ export default class Application {
 
     // catching normal unhandled exceptions
     app.use((err, req, res, next) => {
-      logger.error('Unhandled exception', err);
+      logger.error('Uncaught exception', err);
       res.send('Nasty error'); // todo: explain here
     });
   }
