@@ -6,9 +6,9 @@
   },
   "scripts": {
     "dev": "webpack --config webpack.js --mode development --watch",
-    "test.u": "jest -c ./jest/config.unit.js",
-    "test.u.dev": "jest -c ./jest/config.unit.js --watch",
-    "test.i": "jest -c ./jest/config.integration.js --runInBand",
+    "test:u": "jest -c ./jest/config.unit.js --forceExit",
+    "test:u:dev": "jest -c ./jest/config.unit.js --watch",
+    "test:i": "jest -c ./jest/config.integration.js --runInBand --forceExit",
     "build": "webpack --config webpack.js --mode production",
     "start": "node ./build/index.js",
     "lint": "eslint ./src/",
