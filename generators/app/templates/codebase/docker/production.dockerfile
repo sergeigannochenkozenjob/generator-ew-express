@@ -1,4 +1,4 @@
-FROM node:8.10
+FROM node:11
 RUN apt-get update && apt-get install -y --no-install-recommends vim && apt-get clean
 
 RUN mkdir /app
@@ -6,9 +6,9 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN yarn
 COPY . .
-RUN npm run build
+RUN yarn run build
 
 EXPOSE 3010
-CMD [ "npm", "start" ]
+CMD [ "yarn", "start" ]

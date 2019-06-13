@@ -1,11 +1,11 @@
-FROM node:8.10
+FROM node:11
 RUN apt-get update && apt-get install -y --no-install-recommends vim && apt-get clean
 
 RUN mkdir /app
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+RUN yarn
 
 COPY . .
-CMD [ "npm", "run", "test.i" ]
+CMD [ "yarn", "run", "test:i" ]
