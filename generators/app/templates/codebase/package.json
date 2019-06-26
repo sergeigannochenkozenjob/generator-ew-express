@@ -9,6 +9,7 @@
     "test:u": "jest -c ./jest/config.unit.js --forceExit",
     "test:u:dev": "jest -c ./jest/config.unit.js --watch",
     "test:i": "jest -c ./jest/config.integration.js --runInBand --forceExit",
+    "test:i:dev": "jest -c ./jest/config.integration.js --runInBand --forceExit --watch",
     "build": "webpack --config webpack.js --mode production",
     "start": "node ./build/index.js",
     "lint": "eslint ./src/",

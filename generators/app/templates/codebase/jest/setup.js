@@ -9,7 +9,9 @@ global.logger = {
     console.error(error);
   },
   info: message => {
-    console.dir(message);
+    console.log(message);
   },
-  warn: () => {},
+  warn: () => {
+    console.log(message);
+  },
 };
