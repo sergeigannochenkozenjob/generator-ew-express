@@ -217,9 +217,11 @@ module.exports = class extends Generator {
     }
 
     if (deps.length) {
+      console.log(`yarn add ${deps.join(' ')}`);
       this.spawnCommand("yarn", ["add", ...deps], {cwd: this.answers.applicationFolder});
     }
     if (depsDev.length) {
+      console.log(`yarn add ${depsDev.join(' ')} --dev`);
       this.spawnCommand("yarn", ["add", ...depsDev, "--dev"], {cwd: this.answers.applicationFolder});
     }
   }
