@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import { Settings } from 'ew-internals';
 
 import attachHomeAPI from '../api/home';
+import attachGraphQL from '../api/graphql';
 
 export default class Application {
   static async make() {
@@ -39,21 +40,10 @@ export default class Application {
     //   }),
     // );
 
-    // write the middleware here
-    // app.all('*', (req, res, next) => {
-    //     // console.dir(req);
-    //     console.dir('========');
-    //     console.dir(req.method);
-    //     console.dir(req.path);
-    //     console.dir(req.query);
-    //     console.dir(req.body);
-    //     next();
-    // });
     attachHomeAPI(app);
+    attachGraphQL(app);
 
     instance._express = app;
-
-    // logger.info('Application initialized');
 
     return instance;
   }

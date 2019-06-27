@@ -158,6 +158,11 @@ module.exports = class extends Generator {
       'cors',
       'helmet',
 
+      // graphql
+      'graphql',
+      'apollo-server-express',
+      'merge-graphql-schemas',
+
       // lodash
       'lodash.isstring',
       'lodash.isobject',
