@@ -18,4 +18,4 @@ environment:
   - network.cors=
 labels:
   com.list.name: <%- applicationName %>
-  com.list.link.endpoint: 'GraphQL endpoint___/graphql'
+  com.list.link.endpoint: 'GraphQL endpoint|/graphql'
