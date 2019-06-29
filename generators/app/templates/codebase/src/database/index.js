@@ -47,8 +47,8 @@ export class Database {
   }
 
   getEntityList() {
-    if (!this._entityList) {
-      this._entityList = entities.reduce((result, entity) => {
+    if (!this.entityList) {
+      this.entityList = entities.reduce((result, entity) => {
         return {
           ...result,
           [entity.name]: entity,
@@ -56,6 +56,6 @@ export class Database {
       }, {});
     }
 
-    return this._entityList;
+    return this.entityList;
   }
 }

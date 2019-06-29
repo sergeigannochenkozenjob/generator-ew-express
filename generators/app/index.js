@@ -185,6 +185,9 @@ module.exports = class extends Generator {
       // database
       'typeorm',
       'pg',
+
+      // microservice intercommunications
+      'ioredis',
     ];
 
     const depsDev = [

@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import { Settings } from 'ew-internals';
 
 import { Database } from '../database';
+import { InterCom } from './intercom';
 
 import attachHomeAPI from '../api/home';
 import attachGraphQL from '../api/graphql';
@@ -49,8 +50,13 @@ export default class Application {
       await database.migrate();
     }
 
+    const intercom = new InterCom({
+      url: await settings.get('intercom.url', ''),
+    });
+    await intercom.start();
+
     attachHomeAPI(app);
-    attachGraphQL(app, { dataSources: database });
+    attachGraphQL(app, { dataSources: { database, intercom } });
 
     instance._express = app;
 

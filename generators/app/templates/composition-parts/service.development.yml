@@ -16,6 +16,8 @@ environment:
   - DEBUG_HIDE_DATE=1
   - network.port=<%- port %>
   - network.cors=
+  - database.url='postgres://root:123@db:5432/<%- applicationCode %>'
+  - intercom.url='redis://intercom:6380'
 labels:
   com.list.name: <%- applicationName %>
   com.list.link.endpoint: 'GraphQL endpoint|/graphql'
