@@ -4,6 +4,8 @@ import helmet from 'helmet';
 
 import { Settings } from 'ew-internals';
 
+import { Database } from '../database';
+
 import attachHomeAPI from '../api/home';
 import attachGraphQL from '../api/graphql';
 
@@ -23,7 +25,7 @@ export default class Application {
 
     app.set('host', host);
     app.set('port', port);
-    // // increase the default parse depth of a query string and disable allowPrototypes
+    // increase the default parse depth of a query string and disable allowPrototypes
     // app.set('query parser', query => {
     //   return qs.parse(query, { allowPrototypes: false, depth: 10 });
     // });
@@ -31,7 +33,6 @@ export default class Application {
     this.attachCORS(app, settings);
 
     app.use(helmet());
-    // // turn on JSON parser for REST services
     app.use(express.json());
     // // turn on URL-encoded parser for REST services
     // app.use(
@@ -40,8 +41,16 @@ export default class Application {
     //   }),
     // );
 
+    const database = new Database({
+      url: await settings.get('database.url', ''),
+    });
+    await database.connect();
+    if (__DEV__) {
+      await database.migrate();
+    }
+
     attachHomeAPI(app);
-    attachGraphQL(app);
+    attachGraphQL(app, { dataSources: database });
 
     instance._express = app;
 

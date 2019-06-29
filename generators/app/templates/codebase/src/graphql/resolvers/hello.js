@@ -1,5 +1,7 @@
 export default {
   Query: {
-    hello: () => 'Hello world!',
+    hello: (parent, parameters, { dataSources }) => {
+      return "Hello!";
+    },
   },
 };

@@ -181,6 +181,10 @@ module.exports = class extends Generator {
       'debug',
       'ew-internals',
       'deep-freeze-node',
+
+      // database
+      'typeorm',
+      'pg',
     ];
 
     const depsDev = [
