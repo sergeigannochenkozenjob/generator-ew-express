@@ -14,10 +14,10 @@ environment:
   - DEBUG=gql.*
   - DEBUG_COLORS=1
   - DEBUG_HIDE_DATE=1
-  - network.port=<%- port %>
-  - network.cors=
-  - database.url='postgres://root:123@db:5432/<%- applicationCode %>'
-  - intercom.url='redis://intercom:6380'
+  - NETWORK__PORT=<%- port %>
+  - NETWORK__CORS=
+  - DATABASE__URL='postgres://root:123@db:5432/<%- applicationCode %>'
+  - INTERCOM__URL='redis://intercom:6380'
 labels:
   com.list.name: <%- applicationName %>
   com.list.link.endpoint: 'GraphQL endpoint|/graphql'
