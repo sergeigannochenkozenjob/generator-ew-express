@@ -9,6 +9,8 @@ module.exports = (env, argv) => {
     const development =
       argv.mode === 'development' || env.NODE_ENV === 'development';
 
+    const debuggerPort = process.env.NETWORK__PORT__DEBUGGER || 3001;
+
     return {
         entry: path.join(__dirname, 'src/index.js'),
         target: 'node',
@@ -84,7 +86,7 @@ module.exports = (env, argv) => {
                 __TEST__: false,
             }),
             new NodemonPlugin({
-              nodeArgs: development ? ['--inspect=0.0.0.0:<%= (parseInt(port, 10) + 1) %>'] : [],
+              nodeArgs: development ? [`--inspect=0.0.0.0:${debuggerPort}`] : [],
               watch: path.join(__dirname, 'build'),
             }),<% if (supportTS) { %>
             new ForkTsCheckerWebpackPlugin({
