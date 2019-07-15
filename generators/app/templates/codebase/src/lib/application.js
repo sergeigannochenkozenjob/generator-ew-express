@@ -43,15 +43,15 @@ export default class Application {
         // );
 
         const database = new Database({
-          url: await settings.get('database.url', ''),
+            url: await settings.get('database.url', ''),
         });
         await database.connect();
         if (__DEV__) {
-          await database.migrate();
+            await database.migrate();
         }
 
         const intercom = new InterCom({
-          url: await settings.get('intercom.url', ''),
+            url: await settings.get('intercom.url', ''),
         });
         await intercom.start();
 
@@ -67,10 +67,10 @@ export default class Application {
         // catching async unhandled rejections
         process
             .on('unhandledRejection', err => {
-              logger.error('Unhandled rejection', err);
+                logger.error('Unhandled rejection', err);
             })
             .on('uncaughtException', err => {
-              logger.error('Uncaught exception', err);
+                logger.error('Uncaught exception', err);
             });
 
         // catching normal unhandled exceptions
@@ -85,7 +85,7 @@ export default class Application {
             origin: (origin, cb) => {
                 // allow requests with no origin, like mobile apps or curl requests
                 if (!origin) {
-                  return cb(null, true);
+                    return cb(null, true);
                 }
 
                 // get cors settings on each hit, to be able to change it at the run-time

@@ -1,4 +1,4 @@
 type Error {
-  code: String!
-  message: String
+    code: String!
+    message: String
 }
