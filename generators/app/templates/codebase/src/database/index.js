@@ -3,7 +3,7 @@ import migrations from './migrations';
 import entities from './entities';
 
 export class Database {
-  constructor({ url, password} = {}) {
+  constructor({ url, password } = {}) {
     this.connection = null;
     this.url = url;
     this.password = password;
@@ -52,7 +52,7 @@ export class Database {
         return {
           ...result,
           [entity.name]: entity,
-        }
+        };
       }, {});
     }
 

@@ -11,7 +11,7 @@ const fs = require('fs');
 module.exports = class extends Generator {
   prompting() {
     this.log(
-      yosay(`This generator will install ${chalk.red('Eisenwerk Express application')}.`)
+      yosay(`This generator will install ${chalk.red('Eisenwerk Express application')}.`),
     );
 
     return this.prompt([
@@ -25,7 +25,7 @@ module.exports = class extends Generator {
         name: 'applicationCode',
         message: 'Application code',
         validate: async (value) => {
-          if (typeof value !== "string") {
+          if (typeof value !== 'string') {
             return 'Must be a string';
           }
 
@@ -39,7 +39,7 @@ module.exports = class extends Generator {
           }
 
           return true;
-        }
+        },
       },
       {
         type: 'input',
@@ -63,7 +63,7 @@ module.exports = class extends Generator {
         message: 'Port number',
         default: 3000,
         validate: async (value) => {
-          if (typeof value !== "string") {
+          if (typeof value !== 'string') {
             return true; // the default value will be used
           }
 
@@ -73,7 +73,7 @@ module.exports = class extends Generator {
           }
 
           return true;
-        }
+        },
       },
       {
         type: 'confirm',
@@ -101,7 +101,7 @@ module.exports = class extends Generator {
         this.answers,
         {
           dot: true,
-        }
+        },
       );
     });
   }
@@ -109,19 +109,19 @@ module.exports = class extends Generator {
   async makeScriptsExecutable() {
     const scriptsPath = path.join(process.cwd(), this.answers.applicationFolder, 'script');
     if (await pathExists(scriptsPath)) {
-      this.spawnCommand("chmod", ["+x", path.join(scriptsPath, '*')]);
+      this.spawnCommand('chmod', ['+x', path.join(scriptsPath, '*')]);
     }
   }
 
   async addToComposition() {
     if (this.answers.isMonorepo) {
       const cDevPath = path.join(process.cwd(), 'compose', 'development.yml');
-      if (! await pathExists(cDevPath)) {
+      if (!await pathExists(cDevPath)) {
         return;
       }
 
       const devPart = path.join(this.templatePath('composition-parts'), 'service.development.yml');
-      if (! await pathExists(devPart)) {
+      if (!await pathExists(devPart)) {
         return;
       }
 
@@ -231,11 +231,11 @@ module.exports = class extends Generator {
 
     if (deps.length) {
       console.log(`yarn add ${deps.join(' ')}`);
-      this.spawnCommand("yarn", ["add", ...deps], {cwd: this.answers.applicationFolder});
+      this.spawnCommand('yarn', ['add', ...deps], { cwd: this.answers.applicationFolder });
     }
     if (depsDev.length) {
       console.log(`yarn add ${depsDev.join(' ')} --dev`);
-      this.spawnCommand("yarn", ["add", ...depsDev, "--dev"], {cwd: this.answers.applicationFolder});
+      this.spawnCommand('yarn', ['add', ...depsDev, '--dev'], { cwd: this.answers.applicationFolder });
     }
   }
 };
