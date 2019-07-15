@@ -50,7 +50,10 @@ module.exports = (env, argv) => {
                                         },
                                     ],
                                 ],
-                                plugins: ['@babel/plugin-proposal-object-rest-spread'],
+                                plugins: [
+                                    '@babel/plugin-proposal-object-rest-spread',
+                                ],
+                                cacheDirectory: true,
                             },
                         },
                     ],
