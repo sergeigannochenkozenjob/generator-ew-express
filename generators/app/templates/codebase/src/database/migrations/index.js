@@ -1,3 +1,3 @@
 import Seed from './seed';
 
-export const [Seed];
+export default [Seed];
