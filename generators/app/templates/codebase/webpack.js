@@ -88,13 +88,13 @@ module.exports = (env, argv) => {
                 __DEV__: development,
                 __TEST__: false,
             }),
-            new NodemonPlugin({
+            development && new NodemonPlugin({
               nodeArgs: development ? [`--inspect=0.0.0.0:${debuggerPort}`] : [],
               watch: path.join(__dirname, 'build'),
             }),<% if (supportTS) { %>
-            new ForkTsCheckerWebpackPlugin({
+            development && new ForkTsCheckerWebpackPlugin({
               watch: path.join(__dirname, 'src'),
             }),<% } %>
-        ],
+        ].filter(x => !!x),
     };
 };
