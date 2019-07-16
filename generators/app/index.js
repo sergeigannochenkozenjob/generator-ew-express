@@ -8,6 +8,8 @@ const ejs = require('ejs');
 const yaml = require('js-yaml');
 const fs = require('fs');
 
+const toKebab = value => value.replace(/\./g, '-');
+
 module.exports = class extends Generator {
     prompting() {
         this.log(
@@ -89,6 +91,10 @@ module.exports = class extends Generator {
             if (props.isMonorepo) {
                 props.applicationCodeGlobal = `${path.basename(process.cwd())}_${props.applicationCode}`;
             }
+
+            props.applicationCodeKebab = toKebab(props.applicationCode);
+            props.vendorNameKebab = toKebab(props.vendorName);
+
             this.answers = props;
         });
     }

@@ -22,7 +22,7 @@ export default class Application {
         instance.attachErrorHandler(app);
 
         const host = await settings.get('network.host', 'localhost');
-        const port = await settings.get('network.port', 3000);
+        const port = process.env.PORT || await settings.get('network.port', 3000);
 
         app.set('host', host);
         app.set('port', port);
