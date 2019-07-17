@@ -11,3 +11,5 @@ docker build -t registry.heroku.com/<%- vendorNameKebab %>-<%- applicationCodeKe
 docker push registry.heroku.com/<%- vendorNameKebab %>-<%- applicationCodeKebab %>/web
 
 heroku container:release web -a <%- vendorNameKebab %>-<%- applicationCodeKebab %>
+
+echo "Check out https://<%- vendorNameKebab %>-<%- applicationCodeKebab %>.herokuapp.com";
