@@ -4,7 +4,7 @@ import { mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
 import typeDefs from '../graphql/types';
 import resolvers from '../graphql/resolvers';
 
-const attachGraphQL = (app, { dataSources = {} } = {}) => {
+const useGraphQL = (app, { dataSources = {} } = {}) => {
     const server = new ApolloServer({
         typeDefs: mergeTypes(typeDefs, { all: true }),
         resolvers: mergeResolvers(resolvers),
@@ -21,4 +21,4 @@ const attachGraphQL = (app, { dataSources = {} } = {}) => {
     server.applyMiddleware({ app });
 };
 
-export default attachGraphQL;
+export default useGraphQL;

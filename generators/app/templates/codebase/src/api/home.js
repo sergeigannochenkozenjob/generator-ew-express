@@ -1,6 +1,6 @@
 import { wrapError } from 'ew-internals';
 
-export default app => {
+const useHomeAPI = app => {
     app.get(
         '/',
         wrapError(async (req, res) => {
@@ -8,3 +8,5 @@ export default app => {
         }),
     );
 };
+
+export default useHomeAPI;
