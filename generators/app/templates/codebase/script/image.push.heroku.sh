@@ -5,7 +5,6 @@
 ## Don't forget to authenticate with:
 # heroku login -i
 
-heroku container:login
 docker login --username=_ --password=`heroku auth:token 2> stdout` registry.heroku.com
 
 docker build -t registry.heroku.com/<%- vendorNameKebab %>-<%- applicationCodeKebab %>/web -f docker/production.dockerfile .

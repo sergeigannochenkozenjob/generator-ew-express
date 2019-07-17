@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import path from 'path';
 
 import { Settings } from 'ew-internals';
 
@@ -34,13 +35,13 @@ export default class Application {
         this.attachCORS(app, settings);
 
         app.use(helmet());
+        app.use(express.static(path.join(process.cwd(), 'public')));
         app.use(express.json());
-        // // turn on URL-encoded parser for REST services
-        // app.use(
-        //   express.urlencoded({
-        //     extended: true,
-        //   }),
-        // );
+        app.use(
+          express.urlencoded({
+            extended: true,
+          }),
+        );
 
         const database = new Database({
             url: await settings.get('database.url', ''),
