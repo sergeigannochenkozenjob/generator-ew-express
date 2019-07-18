@@ -4,7 +4,7 @@ services:
   backend:
     build:
       context: ../../
-      dockerfile: infra/itest/itest.dockerfile
+      dockerfile: infra/itest/Dockerfile
     expose:
       - '3010'
     ports:
