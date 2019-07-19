@@ -77,12 +77,6 @@ module.exports = class extends Generator {
                     return true;
                 },
             },
-            {
-                type: 'confirm',
-                name: 'supportTS',
-                message: 'Do we support TypeScript?',
-                default: false,
-            },
         ]).then(props => {
             props.port = props.port || 3000;
             props.debuggerPort = parseInt(props.port, 10) + 1;
@@ -200,10 +194,11 @@ module.exports = class extends Generator {
         const depsDev = [
             '@babel/core',
             '@babel/plugin-proposal-object-rest-spread',
+            '@babel/plugin-proposal-decorators',
+            '@babel/plugin-proposal-class-properties',
             '@babel/plugin-transform-runtime',
             '@babel/preset-env',
             '@babel/preset-stage-0',
-            'apollo-server-testing',
             'babel-eslint',
             'babel-loader',
             'babel-plugin-import-graphql',
@@ -213,27 +208,35 @@ module.exports = class extends Generator {
             'eslint-config-prettier',
             'eslint-plugin-import',
             'eslint-plugin-prettier',
+
+            // graphql
             'graphql-tag',
             'husky',
-            'jest',
             'nodemon',
             'nodemon-webpack-plugin',
             'prettier',
             'pretty-quick',
-            'supertest',
             'raw-loader',
             'webpack',
             'webpack-cli',
             'webpack-node-externals',
             'webpack-merge',
+
+            // testing
+            'apollo-server-testing',
+            'jest',
+            'supertest',
+
+            // typescript
+            'fork-ts-checker-webpack-plugin-alt',
+            'typescript',
+            '@babel/preset-typescript',
+            '@typescript-eslint/eslint-plugin',
+            '@typescript-eslint/parser',
+
+            // other
             'leasot',
         ];
-
-        if (this.answers.supportTS) {
-            depsDev.push('fork-ts-checker-webpack-plugin');
-            depsDev.push('ts-loader');
-            depsDev.push('typescript');
-        }
 
         if (deps.length) {
             console.log(`yarn add ${deps.join(' ')}`);

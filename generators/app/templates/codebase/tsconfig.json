@@ -1,13 +1,20 @@
 {
-  "compilerOptions": {
-    "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
-    "allowJs": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true
-  },
-  "include": ["src/**/*"]
+    "compilerOptions": {
+        "lib": ["esnext.asynciterable", "esnext", "es2017", "dom"],
+        "target": "es5",
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "noImplicitAny": false,
+        "experimentalDecorators": true
+    },
+    "include": ["src/**/*"]
 }
