@@ -9,4 +9,4 @@ COPY yarn.lock ./
 RUN yarn
 
 COPY . .
-CMD [ "yarn", "run", "test:i" ]
+CMD [ "yarn", "run", "e2e" ]

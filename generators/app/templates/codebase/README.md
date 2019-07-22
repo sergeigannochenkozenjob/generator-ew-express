@@ -20,9 +20,9 @@ yarn run dev
 ./script/image.run.sh
 ~~~~
 
-#### To run integration tests in Docker:
+#### To run end-to-end tests in Docker:
 ~~~~
-./script/integration-test.run.sh
+./script/e2e.run.sh
 ~~~~
 
 #### To build a production image and push to Heroku:
