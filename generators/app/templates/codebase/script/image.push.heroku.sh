@@ -7,7 +7,7 @@
 
 docker login --username=_ --password=`heroku auth:token 2> /dev/null` registry.heroku.com
 
-docker build -t registry.heroku.com/<%- vendorNameKebab %>-<%- applicationCodeKebab %>/web -f docker/production.dockerfile .
+docker build -t registry.heroku.com/<%- vendorNameKebab %>-<%- applicationCodeKebab %>/web -f infra/production.dockerfile .
 docker push registry.heroku.com/<%- vendorNameKebab %>-<%- applicationCodeKebab %>/web
 
 heroku container:release web -a <%- vendorNameKebab %>-<%- applicationCodeKebab %>

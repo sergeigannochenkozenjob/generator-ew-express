@@ -1,7 +1,7 @@
 image: <%- applicationCode %>:dev
 build:
     context: ../<%- applicationFolder %>/
-    dockerfile: docker/development.dockerfile
+    dockerfile: infra/development.dockerfile
 expose:
     - '<%- port %>'
     - '<%- debuggerPort %>'

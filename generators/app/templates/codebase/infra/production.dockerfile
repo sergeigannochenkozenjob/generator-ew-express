@@ -3,7 +3,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends vim && apt-get 
 
 WORKDIR /app
 
-COPY . .
+COPY ../docker .
 RUN yarn
 
 ENV NODE_ENV=production
