@@ -117,15 +117,16 @@ module.exports = (env, argv) => {
             new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
             new webpack.ProvidePlugin({
                 _: [path.join(sourceFolder, `lib/lodash.js`), 'default'],
-              logger: ['ew-internals', 'logger'],
+                logger: ['ew-internals', 'logger'],
             }),
             new webpack.DefinePlugin({
                 __DEV__: development,
                 __TEST__: false,
             }),
             development && new NodemonPlugin({
-              nodeArgs: development ? [`--inspect=0.0.0.0:${debuggerPort}`] : [],
-              watch: destinationFolder,
+                nodeArgs: development ? [`--inspect=0.0.0.0:${debuggerPort}`] : [],
+                watch: destinationFolder,
+                ext: 'js,ts,graphql',
             }),
         ].filter(x => !!x),
     };
