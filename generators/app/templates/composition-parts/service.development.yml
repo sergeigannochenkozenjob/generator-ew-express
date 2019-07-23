@@ -17,7 +17,7 @@ environment:
     - DEBUG_COLORS=1
     - DEBUG_HIDE_DATE=1
     - NETWORK__PORT=<%- port %>
-    - NETWORK__PORT__DEBUGGER=<%- (parseInt(port, 10) + 1) %>
+    - NETWORK__PORT__DEBUGGER=<%- debuggerPort %>
     - NETWORK__CORS=
     - DATABASE__URL='postgres://root:123@db:5432/<%- applicationCode %>'
     - INTERCOM__URL='redis://intercom:6380'
