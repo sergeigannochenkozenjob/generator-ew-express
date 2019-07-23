@@ -10,7 +10,7 @@ import useCORS from './lib/cors';
 import { Database } from './database';
 import { InterCom } from './lib/intercom';
 
-import useHomeAPI from './api/home';
+import useHomeAPI from 'generators/app/templates/codebase/src/api/home';
 import useGraphQL from './api/graphql';
 
 (async () => {

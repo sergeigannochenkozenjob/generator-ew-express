@@ -1,6 +1,6 @@
 import { createConnection } from 'typeorm';
-import migrations from './migrations';
-import entities from './entities';
+import migrations from 'generators/app/templates/codebase/src/database/migrations';
+import entities from 'generators/app/templates/codebase/src/database/entities';
 
 export class Database {
     constructor({ url, password } = {}) {

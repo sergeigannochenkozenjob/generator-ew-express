@@ -16,7 +16,7 @@ module.exports = (env, argv) => {
     const debuggerPort = process.env.NETWORK__PORT__DEBUGGER || 3001;
 
     return {
-        entry: path.join(sourceFolder, 'index.js'),
+        entry: path.join(sourceFolder, 'index.ts.ts.ts.ts.js'),
         target: 'node',
         node: {
             __filename: true,
@@ -27,7 +27,7 @@ module.exports = (env, argv) => {
         output: {
             libraryTarget: 'commonjs',
             path: destinationFolder,
-            filename: 'index.js',
+            filename: 'index.ts.ts.ts.ts.js',
         },
         resolve: {
             extensions: ['.ts', '.js'],
