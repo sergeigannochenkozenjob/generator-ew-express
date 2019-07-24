@@ -1,38 +1,39 @@
 {
-  "name": "<%- applicationCode %>",
-  "version": "1.0.0",
-  "bin": {
-    "module-name": "./build/index.js"
-  },
-  "scripts": {
-    "dev": "webpack --config webpack.js --mode development --watch",
-    "test": "jest -c ./jest/config.unit.js --forceExit",
-    "test:dev": "jest -c ./jest/config.unit.js --watch",
-    "e2e": "jest -c ./jest/config.e2e.js --runInBand --forceExit",
-    "e2e:dev": "jest -c ./jest/config.e2e.js --runInBand --forceExit --watch",
-    "build": "webpack --config webpack.js --mode production",
-    "start": "node ./build/index.js",
-    "lint": "eslint ./src/",
-    "lint:fix": "eslint ./src/ --fix",
-    "techdebt": "leasot --exit-nicely --reporter table --skip-unsupported --ignore node_modules,build,migrations ./"
-  },
-  "keywords": [
-    "this",
-    "that"
-  ],
-  "author": "awesome1888@gmail.com",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/awesome1888/boilerplate_express"
-  },
-  "devDependencies": {
-  },
-  "dependencies": {
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
+    "name": "<%- applicationCode %>",
+    "version": "1.0.0",
+    "bin": {
+        "module-name": "./build/index.js"
+    },
+    "scripts": {
+        "dev": "webpack --config webpack.js --mode development --watch",
+        "test": "jest -c ./jest/config.unit.js --forceExit",
+        "test:dev": "jest -c ./jest/config.unit.js --watch",
+        "e2e": "jest -c ./jest/config.e2e.js --runInBand --forceExit",
+        "e2e:dev": "jest -c ./jest/config.e2e.js --runInBand --forceExit --watch",
+        "build": "webpack --config webpack.js --mode production",
+        "migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
+        "start": "node ./build/index.js",
+        "lint": "eslint ./src/",
+        "lint:fix": "eslint ./src/ --fix",
+        "techdebt": "leasot --exit-nicely --reporter table --skip-unsupported --ignore node_modules,build,migrations ./"
+    },
+    "keywords": [
+        "this",
+        "that"
+    ],
+    "author": "awesome1888@gmail.com",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/awesome1888/boilerplate_express"
+    },
+    "devDependencies": {
+    },
+    "dependencies": {
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
     }
-  }
 }

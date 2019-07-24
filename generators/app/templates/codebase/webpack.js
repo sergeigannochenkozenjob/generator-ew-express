@@ -16,7 +16,7 @@ module.exports = (env, argv) => {
     const debuggerPort = process.env.NETWORK__PORT__DEBUGGER || 3001;
 
     return {
-        entry: path.join(sourceFolder, 'index.ts.ts.ts.ts.js'),
+        entry: path.join(sourceFolder, 'index.js'),
         target: 'node',
         node: {
             __filename: true,
@@ -27,7 +27,7 @@ module.exports = (env, argv) => {
         output: {
             libraryTarget: 'commonjs',
             path: destinationFolder,
-            filename: 'index.ts.ts.ts.ts.js',
+            filename: 'index.js',
         },
         resolve: {
             extensions: ['.ts', '.js'],
@@ -77,7 +77,10 @@ module.exports = (env, argv) => {
                                         { legacy: true },
                                     ],
                                     '@babel/plugin-proposal-object-rest-spread',
-                                    '@babel/plugin-proposal-class-properties',
+                                    [
+                                        '@babel/plugin-proposal-class-properties',
+                                        { loose: true },
+                                    ],
                                 ],
                                 cacheDirectory: true,
                             },

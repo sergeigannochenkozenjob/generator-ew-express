@@ -1,20 +1,18 @@
 {
     "compilerOptions": {
-        "lib": ["esnext.asynciterable", "esnext", "es2017", "dom"],
-        "target": "es5",
-        "allowJs": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
+        "module": "commonjs",
+        "declaration": true,
         "noImplicitAny": false,
-        "experimentalDecorators": true
+        "removeComments": true,
+        "noLib": false,
+        "allowSyntheticDefaultImports": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es6",
+        "sourceMap": true,
+        "outDir": "./.build",
+        "baseUrl": "./"
     },
+    "exclude": ["node_modules", ".build"],
     "include": ["src/**/*"]
 }

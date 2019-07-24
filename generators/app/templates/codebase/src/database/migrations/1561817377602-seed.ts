@@ -1,4 +1,5 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
+import { logger } from 'ew-internals';
 
 /**
  * https://github.com/typeorm/typeorm/blob/master/docs/migrations.md

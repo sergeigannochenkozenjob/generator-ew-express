@@ -189,6 +189,9 @@ module.exports = class extends Generator {
 
             // microservice intercommunications
             'ioredis',
+
+            // typescript
+            'ts-node',
         ];
 
         const depsDev = [
