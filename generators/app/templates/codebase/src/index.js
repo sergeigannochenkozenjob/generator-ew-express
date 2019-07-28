@@ -13,6 +13,9 @@ import { InterCom } from './lib/intercom';
 import useHomeAPI from 'generators/app/templates/codebase/src/api/home';
 import useGraphQL from './api/graphql';
 
+import { useMSC } from './lib/msc';
+import controllers from './controllers';
+
 (async () => {
     const app = express();
     const settings = new Settings();
@@ -55,6 +58,9 @@ import useGraphQL from './api/graphql';
 
     useHomeAPI(app);
     useGraphQL(app, { dataSources: { database, intercom } });
+    useMSC(app, controllers, {
+        database,
+    });
 
     app.listen({ port }, () => {
         logger.info(
