@@ -1,3 +1,3 @@
-import { File } from './file';
+import { DemoModel } from './demo-model';
 
-export default [File];
+export default [DemoModel];

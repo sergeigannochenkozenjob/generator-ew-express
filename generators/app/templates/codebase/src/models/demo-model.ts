@@ -4,10 +4,10 @@
 
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-export const TABLE_NAME = 'file';
+export const TABLE_NAME = 'demo_model';
 
 @Entity({ name: TABLE_NAME })
-export class File {
+export class DemoModel {
     @PrimaryGeneratedColumn()
     id: number;
 

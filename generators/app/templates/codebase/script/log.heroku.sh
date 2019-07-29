@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-heroku logs --tail -a <%- vendorNameKebab %>-<%- applicationCodeKebab %>
+VENDOR="<%- vendorNameKebab %>"
+APPLICATION_NAME="<%- applicationCodeKebab %>"
+
+heroku logs --tail -a ${VENDOR}-${APPLICATION_NAME}
