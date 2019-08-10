@@ -12,10 +12,14 @@
         "e2e:dev": "jest -c ./jest/config.e2e.js --runInBand --forceExit --watch",
         "build": "webpack --config webpack.js --mode production",
         "migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
+        "migrate:local": "./script/migrate.sh local",
         "start": "node ./build/index.js",
         "lint": "eslint ./src/",
         "lint:fix": "eslint ./src/ --fix",
-        "techdebt": "leasot --exit-nicely --reporter table --skip-unsupported --ignore node_modules,build,migrations ./"
+        "techdebt": "leasot --exit-nicely --reporter table --skip-unsupported --ignore node_modules,build,migrations ./",
+        "image:build": "./script/image.build.sh",
+        "image:push": "./script/image.push.sh",
+        "image:run": "./script/image.run.sh"
     },
     "keywords": [
         "this",
