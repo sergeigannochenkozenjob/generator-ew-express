@@ -5,7 +5,7 @@
 
 if [ $1 == "local" ]
 then
-    export TYPEORM_URL="postgres://root:123@db:5432/<%- applicationCode %>"
+    export TYPEORM_URL="postgres://root:123@localhost:5432/<%- applicationCode %>"
 else
     URL=
     USERNAME=

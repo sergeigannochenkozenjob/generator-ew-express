@@ -12,7 +12,7 @@ import { DemoOutputDTO } from './output.dto';
 
 @Endpoint('/demo')
 export class DemoController {
-    @Post(':one/:two')
+    @Post(':type/:entity')
     @BodyInput(DemoInputDTO)
     @Output(DemoOutputDTO)
     public async getEntity(
