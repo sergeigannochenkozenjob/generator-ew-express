@@ -19,5 +19,6 @@ fi
 export TYPEORM_CONNECTION="postgres"
 export TYPEORM_ENTITIES="src/database/entities/*.ts"
 export TYPEORM_MIGRATIONS="src/database/entities/*.ts"
+# export TYPEORM_MIGRATIONS_TABLE_NAME="whatever_else"
 
 yarn run migrate
