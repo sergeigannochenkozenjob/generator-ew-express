@@ -5,6 +5,7 @@
 
 if [ $1 == "local" ]
 then
+    export NODE_ENV="development"
     export TYPEORM_URL="postgres://root:123@localhost:5432/<%- applicationCode %>"
 else
     URL=
