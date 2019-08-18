@@ -14,5 +14,5 @@
         "baseUrl": "./"
     },
     "exclude": ["node_modules", ".build"],
-    "include": ["src/**/*"]
+    "include": ["src/**/*", "src/global.d.ts"]
 }
