@@ -115,7 +115,7 @@ module.exports = class extends Generator {
 
     async addToComposition() {
         if (this.answers.isMonorepo) {
-            const cDevPath = path.join(process.cwd(), 'compose', 'development.yml');
+            const cDevPath = path.join(process.cwd(), 'infra', 'development.yml');
             if (!await pathExists(cDevPath)) {
                 return;
             }
