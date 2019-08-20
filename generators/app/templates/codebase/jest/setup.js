@@ -1,4 +1,4 @@
-import _ from '../src/lib/lodash';
+import _ from 'generators/app/templates/codebase/src/lib/lodash';
 
 global._ = _;
 global.__TEST__ = true;

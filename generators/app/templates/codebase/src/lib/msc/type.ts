@@ -11,7 +11,7 @@ export interface InputContext {
     res: Response;
     body: any;
     headers: IncomingHttpHeaders;
-    runtime: StringMap;
+    runtime: RuntimeParameters;
 }
 
 export interface ResultError {
@@ -19,12 +19,54 @@ export interface ResultError {
     code: string;
     type?: string;
 }
+
 export interface Result {
     data?: any;
     errors: ResultError[];
     status?: number;
 }
 
-export interface StringMap {
-    [key: string]: any;
+export interface RuntimeParameters extends StringMap {
+    connectionManager: Nullable<ConnectionManager>;
+}
+
+export interface DTOType extends GenericClass {}
+
+export type DTOAttributeType = DTOType | 'string' | 'number' | 'boolean';
+
+interface MethodRecordCallbackContext {
+    req: Request;
+    res: Response;
+    body: any;
+    headers: IncomingHttpHeaders;
+    runtime: RuntimeParameters;
+}
+
+export interface MethodRecord extends StringMap {
+    method: string;
+    endpoint: string;
+    fn: (params: StringMap, context: MethodRecordCallbackContext) => void;
+    bodyDTO: DTOType;
+    outputDTO: DTOType;
+}
+
+export interface VaultRecord extends StringMap {}
+
+export interface APIVaultRecord extends VaultRecord {
+    endpoint: string;
+    methods: StringMap<MethodRecord>;
+}
+
+export interface DTORecordParameter {
+    required: boolean;
+    type: DTOAttributeType | DTOAttributeType[];
+}
+
+export interface DTORecord {
+    params: DTORecordParameter;
+}
+
+export interface DTOVaultRecord extends VaultRecord {
+    isDTO: boolean;
+    attributes: StringMap<DTORecord>;
 }

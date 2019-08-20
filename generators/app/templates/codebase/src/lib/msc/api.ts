@@ -1,14 +1,15 @@
 import { Express, Response, Request } from 'express';
+// @ts-ignore
 import { wrapError } from 'ew-internals';
 import { getVaultFor, hasVaultFor } from './vault';
 import { getValidator, filterStructure } from './dto-compiler';
 
-import { ResultError, StringMap } from './type';
+import { RuntimeParameters, ResultError, APIVaultRecord } from './type';
 
 export class Result {
-    public data?: any = null;
+    public data?: StringMap = {};
     public errors: ResultError[] = [];
-    public status?: number = null;
+    public status?: Nullable<number> = null;
 
     public toJSON(): object {
         return {
@@ -24,17 +25,19 @@ export const ERROR_REQUEST = 'request';
 export const useMSC = (
     app: Express,
     controllers: Function[],
-    runtimeParameters: StringMap = {},
+    runtimeParameters: RuntimeParameters = { connectionManager: null },
 ) => {
     controllers.forEach((controller: Function) => {
         if (!hasVaultFor(controller)) {
             return;
         }
 
-        const { endpoint: rootEndpoint, methods } = getVaultFor(controller);
-        if (_.isne(rootEndpoint) && _.ione(methods)) {
+        const { endpoint: rootEndpoint, methods } = getVaultFor(
+            controller,
+        ) as APIVaultRecord;
+        if (_.isStringNotEmpty(rootEndpoint) && _.isObjectNotEmpty(methods)) {
             Object.keys(methods).forEach((methodName: string) => {
-                const methodRecord: StringMap = methods[methodName];
+                const methodRecord = methods[methodName];
 
                 const {
                     method,
@@ -43,11 +46,30 @@ export const useMSC = (
                     bodyDTO,
                     outputDTO,
                 } = methodRecord;
-                if (!_.isne(method) && !_.isFunction(fn)) {
+                if (!_.isStringNotEmpty(method) && !_.isFunction(fn)) {
                     return;
                 }
 
-                app[method](
+                let appFunction: Nullable<Function> = null;
+                if (method === 'get') {
+                    appFunction = app.get;
+                } else if (method === 'post') {
+                    appFunction = app.post;
+                } else if (method === 'put') {
+                    appFunction = app.put;
+                } else if (method === 'patch') {
+                    appFunction = app.patch;
+                } else if (method === 'delete') {
+                    appFunction = app.delete;
+                }
+
+                if (!appFunction) {
+                    throw new Error(
+                        `Unsupported method produced by a decorator: ${method}`,
+                    );
+                }
+
+                appFunction(
                     `${rootEndpoint}/${endpoint}`,
                     wrapError(async (req: Request, res: Response) => {
                         const errors: ResultError[] = [];
@@ -110,7 +132,7 @@ export const useMSC = (
 
                             if (outputDTO) {
                                 result.data = filterStructure(
-                                    result.data,
+                                    result.data || [],
                                     outputDTO,
                                 );
                             }

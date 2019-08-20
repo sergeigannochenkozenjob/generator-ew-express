@@ -1,9 +1,15 @@
-import { PropertyDescriptor, StringMap } from './type';
-import { getVaultFor, hasVaultFor } from './vault';
+import {
+    PropertyDescriptor,
+    APIVaultRecord,
+    DTOVaultRecord,
+    DTOType,
+    DTORecordParameter,
+} from './type';
+import { getVaultFor } from './vault';
 
 export const Endpoint = (endpoint: string): Function => {
     return (constructor: Function) => {
-        const vault = getVaultFor(constructor);
+        const vault = getVaultFor(constructor) as APIVaultRecord;
         vault.endpoint = endpoint;
 
         return constructor;
@@ -12,11 +18,11 @@ export const Endpoint = (endpoint: string): Function => {
 
 export const Get = (endpoint?: string): Function => {
     return (
-        target,
+        target: GenericClass,
         property: string,
         descriptor: PropertyDescriptor,
     ): PropertyDescriptor => {
-        const vault = getVaultFor(target.constructor);
+        const vault = getVaultFor(target.constructor) as APIVaultRecord;
         vault.methods = vault.methods || {};
         vault.methods[property] = vault.methods[property] || {};
         Object.assign(vault.methods[property], {
@@ -31,11 +37,11 @@ export const Get = (endpoint?: string): Function => {
 
 export const Post = (endpoint?: string): Function => {
     return (
-        target,
+        target: GenericClass,
         property: string,
         descriptor: PropertyDescriptor,
     ): PropertyDescriptor => {
-        const vault = getVaultFor(target.constructor);
+        const vault = getVaultFor(target.constructor) as APIVaultRecord;
         vault.methods = vault.methods || {};
         vault.methods[property] = vault.methods[property] || {};
         Object.assign(vault.methods[property], {
@@ -50,11 +56,11 @@ export const Post = (endpoint?: string): Function => {
 
 export const Put = (endpoint?: string): Function => {
     return (
-        target,
+        target: GenericClass,
         property: string,
         descriptor: PropertyDescriptor,
     ): PropertyDescriptor => {
-        const vault = getVaultFor(target.constructor);
+        const vault = getVaultFor(target.constructor) as APIVaultRecord;
         vault.methods = vault.methods || {};
         vault.methods[property] = vault.methods[property] || {};
         Object.assign(vault.methods[property], {
@@ -69,11 +75,11 @@ export const Put = (endpoint?: string): Function => {
 
 export const Patch = (endpoint?: string): Function => {
     return (
-        target,
+        target: GenericClass,
         property: string,
         descriptor: PropertyDescriptor,
     ): PropertyDescriptor => {
-        const vault = getVaultFor(target.constructor);
+        const vault = getVaultFor(target.constructor) as APIVaultRecord;
         vault.methods = vault.methods || {};
         vault.methods[property] = vault.methods[property] || {};
         Object.assign(vault.methods[property], {
@@ -88,11 +94,11 @@ export const Patch = (endpoint?: string): Function => {
 
 export const Delete = (endpoint?: string): Function => {
     return (
-        target,
+        target: GenericClass,
         property: string,
         descriptor: PropertyDescriptor,
     ): PropertyDescriptor => {
-        const vault = getVaultFor(target.constructor);
+        const vault = getVaultFor(target.constructor) as APIVaultRecord;
         vault.methods = vault.methods || {};
         vault.methods[property] = vault.methods[property] || {};
         Object.assign(vault.methods[property], {
@@ -105,13 +111,13 @@ export const Delete = (endpoint?: string): Function => {
     };
 };
 
-export const BodyInput = (dto?: Function): Function => {
+export const BodyInput = (dto?: DTOType): Function => {
     return (
-        target,
+        target: GenericClass,
         property: string,
         descriptor: PropertyDescriptor,
     ): PropertyDescriptor => {
-        const vault = getVaultFor(target.constructor);
+        const vault = getVaultFor(target.constructor) as APIVaultRecord;
         vault.methods = vault.methods || {};
         vault.methods[property] = vault.methods[property] || {};
         Object.assign(vault.methods[property], {
@@ -122,13 +128,13 @@ export const BodyInput = (dto?: Function): Function => {
     };
 };
 
-export const Output = (dto?: Function): Function => {
+export const Output = (dto?: DTOType): Function => {
     return (
-        target,
+        target: GenericClass,
         property: string,
         descriptor: PropertyDescriptor,
     ): PropertyDescriptor => {
-        const vault = getVaultFor(target.constructor);
+        const vault = getVaultFor(target.constructor) as APIVaultRecord;
         vault.methods = vault.methods || {};
         vault.methods[property] = vault.methods[property] || {};
         Object.assign(vault.methods[property], {
@@ -141,29 +147,26 @@ export const Output = (dto?: Function): Function => {
 
 export const DTO = (): Function => {
     return (constructor: Function) => {
-        const vault = getVaultFor(constructor);
+        const vault = getVaultFor(constructor) as DTOVaultRecord;
         vault.isDTO = true;
 
         return constructor;
     };
 };
 
-export const Attribute = (params: StringMap): Function => {
+export const Attribute = (params: DTORecordParameter): Function => {
     return (
-        target,
+        target: GenericClass,
         property: string,
         descriptor: PropertyDescriptor,
     ): PropertyDescriptor => {
-        const { initializer } = descriptor;
-
-        const vault = getVaultFor(target.constructor);
+        const vault = getVaultFor(target.constructor) as DTOVaultRecord;
         vault.attributes = vault.attributes || {};
 
         vault.attributes[property] = Object.assign(
             {},
             {
                 params,
-                value: initializer ? initializer() : null,
             },
         );
 

@@ -1,15 +1,17 @@
-import { StringMap } from './type';
+import { DTOType, VaultRecord } from './type';
 
-const vault = new Map();
+type VaultKey = Function | DTOType;
 
-export const getVaultFor = (obj: any): StringMap => {
-    if (!vault[obj]) {
-        vault[obj] = {};
+const vault = new Map<VaultKey, VaultRecord>();
+
+export const getVaultFor = (key: VaultKey): VaultRecord => {
+    if (!vault.has(key)) {
+        vault.set(key, {});
     }
 
-    return vault[obj];
+    return vault.get(key) as VaultRecord;
 };
 
-export const hasVaultFor = (obj: any): boolean => !!vault[obj];
+export const hasVaultFor = (obj: VaultKey): boolean => vault.has(obj);
 
 export const getVault = () => vault;

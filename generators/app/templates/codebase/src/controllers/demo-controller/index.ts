@@ -16,7 +16,7 @@ export class DemoController {
     @BodyInput(DemoInputDTO)
     @Output(DemoOutputDTO)
     public async getEntity(
-        { type, entity },
+        { type, entity } = { type: '', entity: ''},
         { body, runtime: { database } }: InputContext,
     ): Promise<Result> {
         const result = new Result();

@@ -164,19 +164,6 @@ module.exports = class extends Generator {
             'apollo-server-express',
             'merge-graphql-schemas',
 
-            // lodash
-            'lodash.isstring',
-            'lodash.isobject',
-            'lodash.random',
-            'lodash.isnumber',
-            'lodash.isfunction',
-            'lodash.union',
-            'lodash.intersection',
-            'lodash.difference',
-            'lodash.get',
-            'lodash.clonedeep',
-            'lodash.isequal',
-
             // aux
             'uuid',
             'debug',
